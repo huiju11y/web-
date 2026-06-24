@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CameraHub - 相机租赁与二手保真交易平台</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📷</text></svg>" />
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+    <!-- 顶部导航 -->
+    <header class="header" id="header">
+        <div class="header-inner container">
+            <a href="#/" class="logo" data-nav="/">
+                <span class="logo-icon">📷</span>
+                <span class="logo-text">CameraHub</span>
+            </a>
+            <nav class="nav" id="mainNav">
+                <a href="#/" data-nav="/" class="nav-link active">首页</a>
+                <a href="#/products" data-nav="/products" class="nav-link">器材租赁</a>
+                <a href="#/used" data-nav="/used" class="nav-link">二手交易</a>
+                <a href="#/authenticate" data-nav="/authenticate" class="nav-link">保真鉴定</a>
+            </nav>
+            <div class="header-actions">
+                <button class="btn-icon cart-btn" id="cartBtn" title="购物车">
+                    <span class="icon">🛒</span>
+                    <span class="badge" id="cartBadge" style="display:none">0</span>
+                </button>
+                <button class="btn btn-outline btn-sm" id="loginBtn">登录</button>
+                <div class="user-menu" id="userMenu" style="display:none">
+                    <span class="user-avatar" id="userAvatar"></span>
+                    <span class="user-name" id="userName"></span>
+                    <div class="user-dropdown">
+                        <a href="#/orders">我的订单</a>
+                        <a href="#/publish-used">发布二手</a>
+                        <a href="#" id="logoutBtn">退出登录</a>
+                    </div>
+                </div>
+            </div>
+            <button class="menu-toggle" id="menuToggle">☰</button>
+        </div>
+    </header>
+
+    <!-- 移动端侧栏 -->
+    <aside class="mobile-sidebar" id="mobileSidebar">
+        <div class="sidebar-header">
+            <span class="logo-icon">📷</span> CameraHub
+            <button class="sidebar-close" id="sidebarClose">✕</button>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="#/" data-nav="/">首页</a>
+            <a href="#/products" data-nav="/products">器材租赁</a>
+            <a href="#/used" data-nav="/used">二手交易</a>
+            <a href="#/authenticate" data-nav="/authenticate">保真鉴定</a>
+            <a href="#/cart">购物车</a>
+            <a href="#/orders">我的订单</a>
+        </nav>
+    </aside>
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- 主内容区 -->
+    <main class="main" id="mainContent"></main>
+
+    <!-- 购物车侧边面板 -->
+    <div class="cart-panel" id="cartPanel">
+        <div class="cart-panel-header">
+            <h3>购物车</h3>
+            <button class="btn-icon cart-panel-close" id="cartPanelClose">✕</button>
+        </div>
+        <div class="cart-panel-body" id="cartPanelBody">
+            <p class="cart-empty">购物车为空</p>
+        </div>
+        <div class="cart-panel-footer" id="cartPanelFooter" style="display:none">
+            <div class="cart-summary">
+                <span class="cart-total-label">合计租金:</span>
+                <span class="cart-total-price" id="cartTotalPrice">¥0</span>
+            </div>
+            <div class="cart-deposit">
+                <span>预估押金:</span>
+                <span id="cartTotalDeposit">¥0</span>
+            </div>
+            <button class="btn btn-primary btn-block" id="cartCheckoutBtn">去结算</button>
+        </div>
+    </div>
+    <div class="cart-overlay" id="cartOverlay"></div>
+
+    <!-- Toast 通知 -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- 登录弹窗 -->
+    <div class="modal" id="loginModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>登录 CameraHub</h3>
+                <button class="modal-close" data-modal-close>✕</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>手机号</label>
+                    <input type="tel" class="input" id="loginPhone" placeholder="请输入手机号" maxlength="11" />
+                </div>
+                <div class="form-group">
+                    <label>验证码</label>
+                    <div class="input-row">
+                        <input type="text" class="input" id="loginCode" placeholder="请输入验证码" maxlength="6" />
+                        <button class="btn btn-outline btn-sm" id="sendCodeBtn">获取验证码</button>
+                    </div>
+                </div>
+                <button class="btn btn-primary btn-block" id="loginSubmitBtn">登录</button>
+                <p class="login-tip">首次登录将自动注册账号</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 协议弹窗 -->
+    <div class="modal" id="agreementModal">
+        <div class="modal-content modal-lg">
+            <div class="modal-header">
+                <h3 id="agreementTitle">平台协议</h3>
+                <button class="modal-close" data-modal-close>✕</button>
+            </div>
+            <div class="modal-body agreement-body" id="agreementBody"></div>
+        </div>
+    </div>
+
+    <!-- JS 模块 -->
+    <script src="js/data.js" defer></script>
+    <script src="js/store.js" defer></script>
+    <script src="js/components.js" defer></script>
+    <script src="js/router.js" defer></script>
+    <script src="js/api.js" defer></script>
+    <script src="js/ai.js" defer></script>
+    <script src="js/app.js" defer></script>
+</body>
+</html>
