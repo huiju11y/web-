@@ -26,8 +26,8 @@ class Store {
   }
 
   _storageKey() {
-    if (this.state.user && this.state.user.phone) {
-      return 'camerahub_' + this.state.user.phone;
+    if (this.state.user && this.state.user.studentId) {
+      return 'camerahub_' + this.state.user.studentId;
     }
     return 'camerahub_guest';
   }

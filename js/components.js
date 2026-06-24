@@ -530,55 +530,128 @@ function updateUserUI() {
 }
 
 // ==================== 登录功能 ====================
+// API 基础地址（与当前页面同源）
+const API_BASE = '';
+
+// 发送验证码倒计时
+let codeCountdown = null;
+
+function startCodeCountdown(btn) {
+  let sec = 60;
+  btn.disabled = true;
+  if (codeCountdown) clearInterval(codeCountdown);
+  codeCountdown = setInterval(() => {
+    sec--;
+    btn.textContent = `${sec}s后重发`;
+    if (sec <= 0) {
+      clearInterval(codeCountdown);
+      codeCountdown = null;
+      btn.disabled = false;
+      btn.textContent = '获取验证码';
+    }
+  }, 1000);
+}
+
+async function sendSmsCode(phone) {
+  try {
+    const resp = await fetch(`${API_BASE}/api/send-code`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ phone }),
+    });
+    const data = await resp.json();
+    if (data.success) {
+      if (data.mock) {
+        showToast('验证码已发送（模拟模式，请查看服务端控制台）', 'success');
+      } else {
+        showToast('验证码已发送至您的手机', 'success');
+      }
+      return true;
+    } else {
+      showToast(data.message || '发送失败', 'error');
+      return false;
+    }
+  } catch (err) {
+    showToast('网络错误，请确保后端服务已启动（node server.js）', 'error');
+    console.error('发送验证码失败:', err);
+    return false;
+  }
+}
+
+async function doLogin(phone, code, studentId) {
+  try {
+    const resp = await fetch(`${API_BASE}/api/login`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ phone, code, studentId }),
+    });
+    const data = await resp.json();
+    if (data.success) {
+      store.setUser(data.user);
+      closeModal('loginModal');
+      updateUserUI();
+      showToast(`欢迎回来，${data.user.name}！`, 'success');
+      return true;
+    } else {
+      showToast(data.message || '登录失败', 'error');
+      return false;
+    }
+  } catch (err) {
+    showToast('网络错误，请确保后端服务已启动', 'error');
+    console.error('登录失败:', err);
+    return false;
+  }
+}
+
 function initLogin() {
   document.getElementById('loginBtn')?.addEventListener('click', () => openModal('loginModal'));
 
-  document.getElementById('loginSubmitBtn')?.addEventListener('click', () => {
+  // 发送验证码
+  document.getElementById('sendCodeBtn')?.addEventListener('click', async () => {
+    const phone = document.getElementById('loginPhone').value.trim();
+    if (!/^1[3-9]\d{9}$/.test(phone)) {
+      showToast('请输入正确的11位手机号', 'error');
+      return;
+    }
+    const btn = document.getElementById('sendCodeBtn');
+    if (btn.disabled) return; // 倒计时中
+
+    const ok = await sendSmsCode(phone);
+    if (ok) startCodeCountdown(btn);
+  });
+
+  // 登录提交
+  document.getElementById('loginSubmitBtn')?.addEventListener('click', async () => {
+    const studentId = document.getElementById('loginStudentId').value.trim();
     const phone = document.getElementById('loginPhone').value.trim();
     const code = document.getElementById('loginCode').value.trim();
-    if (!/^1[3-9]\d{9}$/.test(phone)) {
-      showToast('请输入正确的手机号', 'error');
-      return;
-    }
-    if (code !== '1234') {
-      showToast('验证码错误（模拟验证码: 1234）', 'error');
-      return;
-    }
-    const users = ['张三', '李四', '王五', '赵六', '陈七'];
-    const name = users[Math.floor(Math.random() * users.length)];
-    store.setUser({
-      name,
-      phone,
-      avatar: name[0],
-      memberSince: '2026',
-      level: '金牌会员',
-    });
-    closeModal('loginModal');
-    updateUserUI();
-    showToast(`欢迎回来，${name}！`);
-  });
 
-  document.getElementById('sendCodeBtn')?.addEventListener('click', () => {
-    const phone = document.getElementById('loginPhone').value.trim();
-    if (!/^1[3-9]\d{9}$/.test(phone)) {
-      showToast('请输入正确的手机号', 'error');
+    if (!studentId) {
+      showToast('请输入学号', 'error');
       return;
     }
-    showToast('验证码已发送（模拟验证码: 1234）', 'success');
-    const btn = document.getElementById('sendCodeBtn');
-    let sec = 60;
+    if (!/^\d{6,12}$/.test(studentId)) {
+      showToast('请输入正确的学号（6-12位数字）', 'error');
+      return;
+    }
+    if (!/^1[3-9]\d{9}$/.test(phone)) {
+      showToast('请输入正确的11位手机号', 'error');
+      return;
+    }
+    if (!code || code.length < 4) {
+      showToast('请输入验证码', 'error');
+      return;
+    }
+
+    const btn = document.getElementById('loginSubmitBtn');
     btn.disabled = true;
-    const timer = setInterval(() => {
-      sec--;
-      btn.textContent = `${sec}s后重发`;
-      if (sec <= 0) {
-        clearInterval(timer);
-        btn.disabled = false;
-        btn.textContent = '获取验证码';
-      }
-    }, 1000);
+    btn.textContent = '登录中...';
+    await doLogin(phone, code, studentId);
+    btn.disabled = false;
+    btn.textContent = '登录 / 注册';
   });
 
+  // 退出登录
   document.getElementById('logoutBtn')?.addEventListener('click', (e) => {
     e.preventDefault();
     store.setUser(null);

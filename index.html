@@ -91,23 +91,28 @@
     <div class="modal" id="loginModal">
         <div class="modal-content">
             <div class="modal-header">
-                <h3>登录 CameraHub</h3>
+                <h3>🔐 本校学生登录</h3>
                 <button class="modal-close" data-modal-close>✕</button>
             </div>
             <div class="modal-body">
+                <p class="login-desc">CameraHub 仅面向本校在校学生，请使用学号和本人手机号登录。</p>
                 <div class="form-group">
-                    <label>手机号</label>
-                    <input type="tel" class="input" id="loginPhone" placeholder="请输入手机号" maxlength="11" />
+                    <label>学号 <span style="color:var(--danger)">*</span></label>
+                    <input type="text" class="input" id="loginStudentId" placeholder="请输入学号" maxlength="12" autocomplete="off" />
                 </div>
                 <div class="form-group">
-                    <label>验证码</label>
+                    <label>手机号 <span style="color:var(--danger)">*</span></label>
+                    <input type="tel" class="input" id="loginPhone" placeholder="请输入本人手机号" maxlength="11" autocomplete="tel" />
+                </div>
+                <div class="form-group">
+                    <label>短信验证码 <span style="color:var(--danger)">*</span></label>
                     <div class="input-row">
-                        <input type="text" class="input" id="loginCode" placeholder="请输入验证码" maxlength="6" />
+                        <input type="text" class="input" id="loginCode" placeholder="请输入验证码" maxlength="6" autocomplete="one-time-code" />
                         <button class="btn btn-outline btn-sm" id="sendCodeBtn">获取验证码</button>
                     </div>
                 </div>
-                <button class="btn btn-primary btn-block" id="loginSubmitBtn">登录</button>
-                <p class="login-tip">首次登录将自动注册账号</p>
+                <button class="btn btn-primary btn-block btn-lg" id="loginSubmitBtn">登录 / 注册</button>
+                <p class="login-tip">首次登录自动注册 · 仅限本校在校学生</p>
             </div>
         </div>
     </div>

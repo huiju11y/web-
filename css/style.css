@@ -292,6 +292,7 @@ textarea.input{resize:vertical;min-height:80px}
 .agreement-body{max-height:60vh;overflow-y:auto;font-size:.9rem;line-height:1.8}
 .agreement-body h4{margin:16px 0 8px;font-size:.95rem}
 .agreement-body p{margin-bottom:8px;color:var(--text-secondary)}
+.login-desc{text-align:center;font-size:.82rem;color:var(--text-secondary);margin-bottom:20px;padding:10px 14px;background:var(--primary-light);border-radius:var(--radius-sm);line-height:1.6}
 .login-tip{text-align:center;font-size:.8rem;color:var(--text-muted);margin-top:12px}
 @keyframes modalIn{from{transform:scale(.95) translateY(-10px);opacity:0}to{transform:scale(1) translateY(0);opacity:1}}
 
