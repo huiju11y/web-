@@ -388,8 +388,8 @@ function initAIChat() {
         </div>
         <div id="aiTestResult" style="font-size:.75rem;margin-top:8px;min-height:18px"></div>
         <div style="font-size:.7rem;color:var(--text-muted);margin-top:8px;line-height:1.5">
-          💡 提示：默认接入 <b>DeepSeek</b>，请填入你的 <a href="https://platform.deepseek.com/api_keys" target="_blank" style="color:var(--primary)">DeepSeek API Key</a>。<br>
-          也可切换为其他 OpenAI 兼容接口（如 <code>gpt-4o</code>、<code>deepseek-reasoner</code>、Ollama 本地模型等）。
+          💡 提示：默认接入 <b>豆包(Doubao)</b>，请填入你的 API Key。<br>
+          也可切换为其他 OpenAI 兼容接口（如 DeepSeek、OpenAI、Ollama 等）。
         </div>
       </div>
 

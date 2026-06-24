@@ -23,9 +23,9 @@ function footerHTML() {
         <div>
           <h4 style="margin-bottom:12px">服务协议</h4>
           <ul style="list-style:none;font-size:.85rem;opacity:.7;line-height:2">
-            <li><a href="#" class="footer-link" data-agreement="rental">租赁服务协议</a></li>
-            <li><a href="#" class="footer-link" data-agreement="trading">二手交易协议</a></li>
-            <li><a href="#" class="footer-link" data-agreement="privacy">隐私政策</a></li>
+            <li><a href="javascript:void(0)" class="footer-link" data-agreement="rental" rel="nofollow">租赁服务协议</a></li>
+            <li><a href="javascript:void(0)" class="footer-link" data-agreement="trading" rel="nofollow">二手交易协议</a></li>
+            <li><a href="javascript:void(0)" class="footer-link" data-agreement="privacy" rel="nofollow">隐私政策</a></li>
           </ul>
         </div>
         <div>
@@ -34,7 +34,7 @@ function footerHTML() {
             <li>📧 support@camerahub.com</li>
             <li>📞 400-888-1234</li>
             <li>💬 在线客服 (9:00-21:00)</li>
-            <li><a href="#" class="footer-link" id="openChatBtn">立即咨询</a></li>
+            <li><a href="javascript:void(0)" class="footer-link" id="openChatBtn" rel="nofollow">立即咨询</a></li>
           </ul>
         </div>
         <div>
@@ -1075,7 +1075,7 @@ function initApp() {
   // 首次路由
   handleRoute();
 
-  // 初始化 AI 智能助手（DeepSeek）
+  // 初始化 AI 智能助手
   if (typeof initAI === 'function') {
     initAI();
   }

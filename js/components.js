@@ -4,12 +4,18 @@
  */
 
 // ==================== 图片工具 ====================
-// 自包含 SVG 占位图 — 永不失效、瞬间加载
+// 智能占位图 — 按品牌/品类生成差异化视觉
 function productImgUrl(seed, width, height) {
   const colors = ['#2563eb','#16a34a','#dc2626','#f59e0b','#8b5cf6','#ec4899','#06b6d4'];
   const hash = (seed || '').split('').reduce((s, c) => s + c.charCodeAt(0), 0);
   const bg = colors[Math.abs(hash) % colors.length];
-  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}"><rect fill="${bg}" width="${width}" height="${height}"/><text x="${width/2}" y="${height/2}" text-anchor="middle" dy=".3em" fill="white" font-size="${Math.min(width,height)/5}" font-family="sans-serif">📷</text></svg>`;
+  const fs = Math.min(width, height) / 6;
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}">
+    <defs><linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="${bg}" stop-opacity="0.9"/><stop offset="100%" stop-color="${bg}" stop-opacity="0.6"/></linearGradient></defs>
+    <rect fill="url(#g)" width="${width}" height="${height}"/>
+    <text x="${width/2}" y="${height/2 - fs*0.3}" text-anchor="middle" fill="rgba(255,255,255,0.9)" font-size="${fs}" font-family="sans-serif">📷</text>
+    <text x="${width/2}" y="${height/2 + fs*0.7}" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="${fs*0.35}" font-family="sans-serif">CameraHub</text>
+  </svg>`;
   return 'data:image/svg+xml,' + encodeURIComponent(svg);
 }
 
