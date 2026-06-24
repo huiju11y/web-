@@ -35,7 +35,7 @@ const MockData = {
   products: [
     {
       id: 1, category: 'dslr', brand: 'canon', condition: 'like_new', type: 'rent', rating: 92,
-      name: 'Canon EOS R5 专业全画幅微单相机',
+      name: 'Canon 专业全画幅微单相机',
       shortName: 'EOS R5',
       specs: { sensor: '4500万像素全画幅CMOS', iso: '100-51200', shutter: '1/8000s', video: '8K RAW', af: '全像素双核AF II', stabilization: '5轴机身防抖', weight: '738g', mount: 'RF卡口' },
       price: { daily: 150, weekly: 900, monthly: 3000, deposit: 5000 },
@@ -50,7 +50,7 @@ const MockData = {
     },
     {
       id: 2, category: 'dslr', brand: 'nikon', condition: 'excellent', type: 'rent', rating: 88,
-      name: 'Nikon Z8 专业全画幅微单相机',
+      name: 'Nikon 专业全画幅微单相机',
       shortName: 'Z8',
       specs: { sensor: '4570万像素堆栈式CMOS', iso: '64-25600', shutter: '1/32000s', video: '8K/60p', af: '493点混合AF', stabilization: '5轴VR防抖', weight: '910g', mount: 'Z卡口' },
       price: { daily: 140, weekly: 840, monthly: 2800, deposit: 4500 },
@@ -64,7 +64,7 @@ const MockData = {
     },
     {
       id: 3, category: 'mirrorless', brand: 'sony', condition: 'new', type: 'rent', rating: 95,
-      name: 'Sony Alpha 7R V 全画幅微单相机',
+      name: 'Sony 全画幅微单相机',
       shortName: 'A7R V',
       specs: { sensor: '6100万像素全画幅Exmor R CMOS', iso: '100-32000', shutter: '1/8000s', video: '8K/24p', af: 'AI智能AF', stabilization: '5轴8级防抖', weight: '723g', mount: 'E卡口' },
       price: { daily: 150, weekly: 900, monthly: 3000, deposit: 5000 },
@@ -78,7 +78,7 @@ const MockData = {
     },
     {
       id: 4, category: 'mirrorless', brand: 'fujifilm', condition: 'like_new', type: 'rent', rating: 90,
-      name: 'Fujifilm GFX 100S 中画幅微单相机',
+      name: 'Fujifilm 中画幅微单相机',
       shortName: 'GFX100S',
       specs: { sensor: '1.02亿像素中画幅CMOS', iso: '100-12800', shutter: '1/4000s', video: '4K/30p', af: '相位检测AF', stabilization: '5轴6.5级防抖', weight: '900g', mount: 'G卡口' },
       price: { daily: 150, weekly: 900, monthly: 3000, deposit: 5000 },
@@ -91,7 +91,7 @@ const MockData = {
     },
     {
       id: 5, category: 'lens', brand: 'canon', condition: 'excellent', type: 'rent', rating: 91,
-      name: 'Canon RF 70-200mm F2.8 L IS USM 远摄变焦镜头',
+      name: 'Canon 远摄变焦镜头',
       shortName: 'RF 70-200 F2.8',
       specs: { focal: '70-200mm', aperture: 'F2.8', filter: '77mm', stabilization: '5级防抖', weight: '1070g', mount: 'RF卡口' },
       price: { daily: 130, weekly: 780, monthly: 2600, deposit: 3000 },
@@ -104,7 +104,7 @@ const MockData = {
     },
     {
       id: 6, category: 'lens', brand: 'sony', condition: 'new', type: 'rent', rating: 93,
-      name: 'Sony FE 24-70mm F2.8 GM II 标准变焦镜头',
+      name: 'Sony 标准变焦镜头',
       shortName: '24-70 GM II',
       specs: { focal: '24-70mm', aperture: 'F2.8', filter: '82mm', stabilization: '无(机身防抖)', weight: '695g', mount: 'E卡口' },
       price: { daily: 130, weekly: 780, monthly: 2600, deposit: 3000 },
@@ -117,7 +117,7 @@ const MockData = {
     },
     {
       id: 7, category: 'video', brand: 'sony', condition: 'excellent', type: 'rent', rating: 89,
-      name: 'Sony FX3 全画幅电影摄影机',
+      name: 'Sony 全画幅电影摄影机',
       shortName: 'FX3',
       specs: { sensor: '1210万像素全画幅CMOS', iso: '80-409600', video: '4K/120p', af: '快速混合AF', stabilization: '5轴机身防抖', weight: '715g', mount: 'E卡口' },
       price: { daily: 150, weekly: 900, monthly: 3000, deposit: 5000 },
@@ -130,7 +130,7 @@ const MockData = {
     },
     {
       id: 8, category: 'lighting', brand: 'godox', condition: 'good', type: 'rent', rating: 84,
-      name: 'Godox SL150W II 150W LED常亮摄影灯',
+      name: 'Godox 150W LED常亮摄影灯',
       shortName: 'SL150W II',
       specs: { power: '150W', cri: '96+', tlc: '97+', brightness: '58000lux@1m', remote: '2.4G无线遥控', weight: '3.5kg' },
       price: { daily: 100, weekly: 600, monthly: 2000, deposit: 1000 },
@@ -143,7 +143,7 @@ const MockData = {
     },
     {
       id: 9, category: 'accessory', brand: 'dj', condition: 'new', type: 'rent', rating: 92,
-      name: 'DJI RS 4 Pro 专业手持稳定器',
+      name: 'DJI 专业手持稳定器',
       shortName: 'RS 4 Pro',
       specs: { payload: '4.5kg', battery: '12小时', features: '自动轴锁/蓝牙快门/跟焦电机', weight: '1.4kg', compatible: '主流微单/电影机' },
       price: { daily: 120, weekly: 720, monthly: 2400, deposit: 2000 },
@@ -156,7 +156,7 @@ const MockData = {
     },
     {
       id: 10, category: 'lens', brand: 'sigma', condition: 'excellent', type: 'rent', rating: 87,
-      name: 'Sigma 85mm F1.4 DG DN Art 人像定焦镜头',
+      name: 'Sigma 人像定焦镜头',
       shortName: '85mm F1.4 Art',
       specs: { focal: '85mm', aperture: 'F1.4', filter: '77mm', minFocus: '0.85m', weight: '630g', mount: 'E卡口' },
       price: { daily: 120, weekly: 720, monthly: 2400, deposit: 2500 },
@@ -169,7 +169,7 @@ const MockData = {
     },
     {
       id: 11, category: 'dslr', brand: 'canon', condition: 'good', type: 'used', rating: 75,
-      name: 'Canon EOS 5D Mark IV 单反相机 (二手)',
+      name: 'Canon 单反相机 (二手)',
       shortName: '5D Mark IV',
       specs: { sensor: '3040万像素全画幅CMOS', iso: '100-32000', shutter: '1/8000s', video: '4K/30p', af: '61点AF', shutterCount: '约45000次', weight: '890g' },
       price: { sell: 5200, original: 18999, deposit: 0 },
@@ -181,7 +181,7 @@ const MockData = {
     },
     {
       id: 12, category: 'lens', brand: 'nikon', condition: 'excellent', type: 'used', rating: 85,
-      name: 'Nikon AF-S 24-70mm F2.8E ED VR 镜头 (二手)',
+      name: 'Nikon 镜头 (二手)',
       shortName: '24-70 F2.8 VR',
       specs: { focal: '24-70mm', aperture: 'F2.8', filter: '82mm', stabilization: 'VR防抖', weight: '1070g', usageYears: '2年' },
       price: { sell: 4200, original: 12999, deposit: 0 },
@@ -193,7 +193,7 @@ const MockData = {
     },
     {
       id: 13, category: 'mirrorless', brand: 'sony', condition: 'like_new', type: 'used', rating: 90,
-      name: 'Sony A7M4 全画幅微单相机 (二手)',
+      name: 'Sony 全画幅微单相机 (二手)',
       shortName: 'A7M4',
       specs: { sensor: '3300万像素全画幅CMOS', iso: '100-51200', shutter: '1/8000s', video: '4K/60p', af: '759点相位检测', shutterCount: '约12000次', weight: '658g' },
       price: { sell: 9800, original: 16999, deposit: 0 },
@@ -205,7 +205,7 @@ const MockData = {
     },
     {
       id: 14, category: 'accessory', brand: 'manfrotto', condition: 'good', type: 'used', rating: 78,
-      name: 'Manfrotto 055XPROB 专业三脚架 (二手)',
+      name: 'Manfrotto 专业三脚架 (二手)',
       shortName: '055XPROB',
       specs: { material: '铝合金', height: '178cm(含中轴)', load: '7kg', weight: '2.4kg', sections: '3节' },
       price: { sell: 450, original: 1580, deposit: 0 },
@@ -217,7 +217,7 @@ const MockData = {
     },
     {
       id: 15, category: 'mirrorless', brand: 'fujifilm', condition: 'excellent', type: 'used', rating: 86,
-      name: 'Fujifilm X-T5 微单相机 (二手)',
+      name: 'Fujifilm 微单相机 (二手)',
       shortName: 'X-T5',
       specs: { sensor: '4020万像素APS-C X-Trans CMOS 5 HR', iso: '125-12800', shutter: '1/180000s(电子)', video: '6.2K/30p', af: '425点智能AF', shutterCount: '约8000次', weight: '557g' },
       price: { sell: 7800, original: 12190, deposit: 0 },
@@ -229,7 +229,7 @@ const MockData = {
     },
     {
       id: 16, category: 'lens', brand: 'canon', condition: 'good', type: 'used', rating: 72,
-      name: 'Canon EF 50mm F1.2 L USM 人像镜头 (二手)',
+      name: 'Canon 人像镜头 (二手)',
       shortName: 'EF 50 F1.2L',
       specs: { focal: '50mm', aperture: 'F1.2', filter: '72mm', minFocus: '0.45m', weight: '580g', mount: 'EF卡口', usageYears: '5年' },
       price: { sell: 3800, original: 10999, deposit: 0 },
@@ -253,7 +253,7 @@ const MockData = {
     },
     {
       id: 18, category: 'lens', brand: 'sony', condition: 'like_new', type: 'used', rating: 92,
-      name: 'Sony FE 70-200mm F2.8 GM OSS II 镜头 (二手)',
+      name: 'Sony 镜头 (二手)',
       shortName: '70-200 GM II',
       specs: { focal: '70-200mm', aperture: 'F2.8', filter: '77mm', stabilization: 'OSS防抖', weight: '1045g', mount: 'E卡口', usageMonths: '3个月' },
       price: { sell: 13800, original: 18999, deposit: 0 },
@@ -265,7 +265,7 @@ const MockData = {
     },
     {
       id: 19, category: 'accessory', brand: 'dj', condition: 'excellent', type: 'used', rating: 83,
-      name: 'DJI RS 3 Mini 轻量手持稳定器 (二手)',
+      name: 'DJI 轻量手持稳定器 (二手)',
       shortName: 'RS 3 Mini',
       specs: { payload: '2kg', battery: '10小时', features: '蓝牙快门/原生竖拍', weight: '795g', compatible: '微单/卡片机', usageMonths: '6个月' },
       price: { sell: 1200, original: 1999, deposit: 0 },
@@ -289,7 +289,7 @@ const MockData = {
     },
     {
       id: 21, category: 'video', brand: 'dj', condition: 'excellent', type: 'rent', rating: 90,
-      name: 'DJI Pocket 3 口袋云台相机创作套装',
+      name: 'DJI 口袋云台相机创作套装',
       shortName: 'Pocket 3',
       specs: { sensor: '1英寸CMOS', video: '4K/120fps', stabilization: '3轴云台', screen: '2英寸旋转屏', features: 'ActiveTrack 6.0', weight: '179g' },
       price: { daily: 100, weekly: 600, monthly: 2000, deposit: 1500 },
@@ -302,7 +302,7 @@ const MockData = {
     },
     {
       id: 22, category: 'lighting', brand: 'godox', condition: 'like_new', type: 'rent', rating: 88,
-      name: 'Godox AD600Pro 600Ws外拍闪光灯套装',
+      name: 'Godox 外拍闪光灯套装',
       shortName: 'AD600Pro',
       specs: { power: '600Ws', flashDuration: '1/10000s', powerRange: '1/256-1/1', battery: '500次全光', remote: '内置2.4G X系统', weight: '3.6kg(含电池)' },
       price: { daily: 120, weekly: 720, monthly: 2400, deposit: 3000 },
@@ -335,7 +335,7 @@ const MockData = {
       }
     },
     {
-      id: 'AUTH-003', productName: 'Nikon Z6 II', applicant: '陈同学', submitDate: '2026-06-15',
+      id: 'AUTH-003', productName: 'Nikon 全画幅微单相机', applicant: '陈同学', submitDate: '2026-06-15',
       status: 'pending', result: null,
       report: null
     },

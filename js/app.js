@@ -894,7 +894,7 @@ function renderPublishUsedPage() {
         <p style="font-size:.85rem;color:var(--text-secondary);margin-bottom:20px">请如实描述器材信息，虚假描述将影响卖家信用</p>
         <div class="form-group">
           <label>器材完整名称 <span style="color:var(--danger)">*</span></label>
-          <input type="text" class="input" id="pubName" placeholder="如 Canon EOS R5 单机" />
+          <input type="text" class="input" id="pubName" placeholder="如 Canon 专业单反相机" />
         </div>
         <div class="form-row">
           <div class="form-group">
