@@ -41,43 +41,45 @@ const AIService = {
     } catch (e) { /* ignore */ }
   },
 
-  // ========== 构建系统提示词（含平台器材数据） ==========
+  // ========== 构建系统提示词（精简版，不含完整器材列表） ==========
   buildSystemPrompt() {
     const products = MockData.products;
     const rentalProducts = products.filter(p => p.type === 'rent');
     const usedProducts = products.filter(p => p.type === 'used');
 
-    const rentalList = rentalProducts.map(p => {
-      return `- ID:${p.id} | ${p.name} | 日租¥${p.price.daily}/周租¥${p.price.weekly}/月租¥${p.price.monthly} | 押金¥${p.price.deposit} | 库存${p.stock} | 评分${p.rating}%`;
+    // 只统计概览，不列举每件器材
+    const rentalSummary = rentalProducts.map(p => {
+      const brand = MockData.brands.find(b => b.id === p.brand)?.name || '';
+      return `- ${brand} | ${p.name} | 日租¥${p.price.daily}`;
     }).join('\n');
 
-    const usedList = usedProducts.map(p => {
-      return `- ID:${p.id} | ${p.name} | 售价¥${p.price.sell} | 成色${p.condition} | 库存${p.stock} | 评分${p.rating || '暂无'}%`;
+    const usedSummary = usedProducts.map(p => {
+      const brand = MockData.brands.find(b => b.id === p.brand)?.name || '';
+      return `- ${brand} | ${p.name} | 售价¥${p.price.sell}`;
     }).join('\n');
 
     return `你是 CameraHub 摄影器材租赁与二手交易平台的 AI 智能客服助手，名字叫"小C"。请用简体中文、友好专业的语气与用户交流。
 
 【平台介绍】
-CameraHub 是一个专业的摄影器材租赁与二手保真交易平台，覆盖 Canon/Nikon/Sony/Fujifilm/Sigma/DJI 等 10+ 品牌，提供单反、微单、镜头、摄像机、灯光、配件等全品类器材。
+CameraHub 是一个专业的摄影器材租赁与二手保真交易平台，覆盖 Canon/Nikon/Sony/Fujifilm/Sigma/DJI 等品牌，提供单反、微单、镜头、摄像机、灯光、配件等全品类器材。
 
-【当前可租赁器材】
-${rentalList}
+【可租赁器材】
+${rentalSummary}
 
-【当前可买二手器材】
-${usedList}
+【可买二手器材】
+${usedSummary}
 
 【你的能力】
-1. 器材推荐：根据用户的预算、需求（人像/风光/视频/Vlog/商业等）、水平（入门/进阶/专业）推荐最合适的器材
-2. 价格咨询：回答租金、押金、售价等问题
-3. 租赁帮助：解释租期选择（按天/周/月）、押金退还规则、归还流程
+1. 器材推荐：根据用户的预算、需求（人像/风光/视频/Vlog/商业等）推荐最合适的器材
+2. 价格咨询：回答租金、售价等问题
+3. 租赁帮助：解释租期选择（按天/周/月）、押金退还规则
 4. 二手交易：解答保真鉴定流程、二手购买注意事项
-5. 摄影问答：回答摄影技巧相关问题（如光圈、快门、ISO、构图等）
+5. 摄影问答：回答摄影技巧相关问题
 
 【回复要求】
-- 回复简洁明了，控制在200字以内（除非用户要求详细说明）
-- 推荐器材时直接给出器材名称和价格，方便用户查看
-- 如果用户预算明确，优先推荐性价比最高的方案
-- 适当时可引导用户操作：如"您可以点击器材租赁页面查看详情"
+- 简洁明了，控制在200字以内
+- 推荐器材时给出名称和价格
+- 优先推荐性价比最高的方案
 - 不要编造不存在的器材或价格信息`;
   },
 
@@ -237,13 +239,13 @@ ${usedList}
 
       // 关键词匹配
       const keywords = [
-        ['人像', 'portrait', '85', '70-200', '大光圈', 'f1.4', 'f1.2', '虚化'],
-        ['风光', 'landscape', '广角', '16-35', '14-24', '高像素', '6100万', '4500万'],
-        ['视频', 'video', 'vlog', '8k', '4k', '电影', '稳定'],
-        ['入门', '新手', '便宜', '性价比', '入门级'],
-        ['专业', '旗舰', '顶级', '商用'],
-        ['灯光', '补光', '闪光', 'led'],
-        ['稳定器', '三脚架', '云台', 'gimbal'],
+        ['人像', '大光圈', '虚化'],
+        ['风光', '广角', '高像素'],
+        ['视频', 'vlog', '电影', '稳定'],
+        ['入门', '新手', '性价比'],
+        ['专业', '旗舰', '顶级'],
+        ['灯光', '补光', '闪光'],
+        ['稳定器', '三脚架', '云台'],
       ];
 
       for (const group of keywords) {
@@ -284,8 +286,7 @@ ${usedList}
 
     const productList = MockData.products.map(p => {
       const brand = MockData.brands.find(b => b.id === p.brand)?.name || '';
-      const cat = MockData.categories.find(c => c.id === p.category)?.name || '';
-      return `${p.id}|${brand} ${p.name}|${cat}|${p.type}|${p.type==='rent'?'日租¥'+p.price.daily:'售价¥'+p.price.sell}|库存${p.stock}`;
+      return `${p.id}|${brand} ${p.name}|${p.type}`;
     }).join('\n');
 
     try {
@@ -394,10 +395,8 @@ function initAIChat() {
 
       <!-- 快捷入口 -->
       <div class="ai-quick-actions" id="aiQuickActions">
-        <button class="ai-quick-btn" data-prompt="我想租一台适合拍视频的微单相机，预算每天150以内">🎥 视频拍摄推荐</button>
-        <button class="ai-quick-btn" data-prompt="我想买一部二手全画幅相机，有什么推荐？">💰 二手相机推荐</button>
-        <button class="ai-quick-btn" data-prompt="帮我推荐一个适合拍人像的镜头">📸 人像镜头推荐</button>
-        <button class="ai-quick-btn" data-prompt="作为新手入门摄影，我应该租什么器材？">🌱 新手入门推荐</button>
+        <button class="ai-quick-btn" data-prompt="我想租一台适合拍视频的微单相机，预算每天150以内">🎥 器材租赁推荐</button>
+        <button class="ai-quick-btn" data-prompt="我想买一部二手全画幅相机，有什么推荐？">💰 二手交易推荐</button>
       </div>
 
       <!-- 消息列表 -->
